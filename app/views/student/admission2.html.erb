@@ -93,20 +93,7 @@
 
         <hr class="label-underline"></hr>
 
-        <div class="label-field-pair">
-          <label for="parent_detail_dob"><%= t("date_of_birth") %></label>
-          <div class="text-input-bg"><%= calendar_date_select_tag 'guardian[dob]', nil,
-              :year_range => 60.years.ago..20.years.ago, :readonly=>true, :popup=>"force" %></div>
-        </div>
 
-        <hr class="label-underline"></hr>
-
-        <div class="label-field-pair">
-          <label for="parent_detail_education"><%= t('education') %></label>
-          <div class="text-input-bg"><%= f.text_field :education %></div>
-        </div>
-
-        <hr class="label-underline"></hr>
 
         <div class="label-field-pair">
           <label for="parent_detail_occupation"><%= t('occupation') %></label>
@@ -115,10 +102,6 @@
 
         <hr class="label-underline"></hr>
 
-        <div class="label-field-pair">
-          <label for="parent_detail_income"><%= t('income') %></label>
-          <div class="text-input-bg"><%= f.text_field :income %></div>
-        </div>
 
         <br/>
 
@@ -137,7 +120,7 @@
       <div id="admission1_form_vertical_block_right">
 
         <div class="label-field-pair">
-          <label for="master_student_city"><%= t('address_line') %> 1</label>
+          <label for="master_student_city"><%= t('address_line') %> </label>
           <% unless @student.address_line1.empty? %>
             <div class="text-input-bg"><%= f.text_field :office_address_line1,:value=>@student.address_line1 %></div>
           <% else %>
@@ -147,16 +130,7 @@
 
         <hr class="label-underline"></hr>
 
-        <div class="label-field-pair">
-          <label for="master_student_city"><%= t('address_line') %> 2</label>
-          <% unless @student.address_line2.empty? %>
-            <div class="text-input-bg"><%= f.text_field :office_address_line2,:value=>@student.address_line2 %></div>
-          <% else %>
-            <div class="text-input-bg"><%= f.text_field :office_address_line2 %></div>
-          <% end %>
-        </div>
 
-        <hr class="label-underline"></hr>
 
         <div class="label-field-pair">
           <label for="parent_detail_city"><%= t('city') %></label>
@@ -169,16 +143,7 @@
 
         <hr class="label-underline"></hr>
 
-        <div class="label-field-pair">
-          <label for="parent_detail_state"><%= t('state') %></label>
-          <% unless @student.state.empty? %>
-            <div class="text-input-bg"><%= f.text_field :state,:value=>@student.state %></div>
-          <% else %>
-            <div class="text-input-bg"><%= f.text_field :state %></div>
-          <% end %>
-        </div>
 
-        <hr class="label-underline"></hr>
 
         <div class="label-field-pair">
           <label for="parent_detail_country"><%= t('country') %></label>
@@ -192,18 +157,12 @@
         <hr class="label-underline"></hr>
 
         <div class="label-field-pair">
-          <label for="parent_detail_office_phone1"><%= t('phone') %> 1</label>
+          <label for="parent_detail_office_phone1"><%= t('phone') %> </label>
           <div class="text-input-bg"><%= f.text_field :office_phone1 %></div>
         </div>
 
         <hr class="label-underline"></hr>
 
-        <div class="label-field-pair">
-          <label for="parent_detail_office_phone2"><%= t('phone') %> 2</label>
-          <div class="text-input-bg"><%= f.text_field :office_phone2 %></div>
-        </div>
-
-        <hr class="label-underline"></hr>
 
         <div class="label-field-pair">
           <label for="parent_detail_mob_phone"><%= t('mobile') %></label>

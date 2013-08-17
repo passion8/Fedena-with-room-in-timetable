@@ -96,23 +96,22 @@
     <table width="700">
       <tr class="odd left"><td><%= t('admission_date') %></td><td class="right"><%= I18n.l(@student.admission_date,:format=>:normal) unless @student.admission_date.nil? %></td></tr>
       <tr class="even left"><td><%= t('date_of_birth') %></td><td class="right"><%= I18n.l(@student.date_of_birth,:format=>:normal) unless @student.date_of_birth.nil? %></td></tr>
-      <tr class="odd left"><td><%= t('blood_group') %></td><td class="right"><%= @student.blood_group %></td></tr>
-      <tr class="even left"><td><%= t('gender') %></td><td class="right"><%= t("#{@student.gender_as_text.downcase}") %></td></tr>
+    
+      <tr class="odd left"><td><%= t('gender') %></td><td class="right"><%= t("#{@student.gender_as_text.downcase}") %></td></tr>
 
-      <tr class="odd left"><td><%= t('nationality') %></td><td class="right"><%= @student.nationality.name unless @student.nationality_id.nil? %></td></tr>
-      <tr class="even left"><td><%= t('language') %></td><td class="right"><%= @student.language %></td></tr>
-
+      <tr class="even left"><td><%= t('nationality') %></td><td class="right"><%= @student.nationality.name unless @student.nationality_id.nil? %></td></tr>
+   
       <tr class="odd left"><td><%= t('category') %></td><td class="right"><%= @student.student_category.name unless @student.student_category.nil? %></td></tr>
       <tr class="even left"><td><%= t('religion') %></td><td class="right"><%= @student.religion %></td></tr>
       <tr class="odd left"><td><%= t('address') %></td><td class="right"><%= @student.address_line1%><%= ', ' unless @student.address_line1.blank? %><%=  @student.address_line2 %></td></tr>
 <%#*<tr class="even left"><td></td><td class="right"><%= @student.address_line2%>
       <tr class="even left"><td><%= t('city') %></td><td class="right"><%= @student.city %></td></tr>
-      <tr class="odd left"><td><%= t('state') %></td><td class="right"><%= @student.state %></td></tr>
-      <tr class="even left"><td><%= t('zip') %></td><td class="right"><%= @student.pin_code %></td></tr>
+
+
       <tr class="odd left"><td><%= t('country') %></td><td class="right"><%= @student.country.name unless @student.country_id.nil? %></td></tr>
       <tr class="even left"><td><%= t('phone') %></td><td class="right"><%= @student.phone1 %></td></tr>
-      <tr class="odd left"><td><%= t('mobile') %></td><td class="right"><%= @student.phone2 %></td></tr>
-      <tr class="even left"><td><%= t('email') %></td><td class="right"><%= @student.email %></td></tr>
+
+      <tr class="odd left"><td><%= t('email') %></td><td class="right"><%= @student.email %></td></tr>
       <% unless @student.batch.employee_id.nil? %>
         <% @assigned_employees = Employee.find(:all,:conditions=>"FIND_IN_SET(id,\"#{@student.batch.employee_id}\")")  %>
         <tr class="even left"><td><%= t('group_tutor') %>(s) :</td><td class="right">
@@ -128,7 +127,7 @@
       <% if @sms_setting.application_sms_active %>
         <tr class="odd left"><td><%= t('sms_alerts') %></td><td class="right"><%= @student.is_sms_enabled?? "Enabled":"Disabled" %></td></tr>
       <% end  %>
-      <tr class="even left"><td><%= t('contact_message') %></td><td class="right">
+      <tr class="odd left"><td><%= t('contact_message') %></td><td class="right">
           <%= link_to @immediate_contact.full_name, :controller => "student", :action => "guardians", :id => @student.id \
             unless @immediate_contact.nil? %><%= "(" + @immediate_contact.mobile_phone + ")" if @immediate_contact and !@immediate_contact.mobile_phone.empty? %>
           <% if @current_user.admin? %>
@@ -169,11 +168,11 @@
         </tr>
       <% end %>
       <% unless @previous_data.nil? %>
-        <tr class="even left"><td></td><td class="right"><%= t('previous_details') %></td></tr>
+        <tr class="odd left"><td></td><td class="right"><%= t('previous_details') %></td></tr>
         <tr class="odd left"><td><%= t('previous_institution') %></td><td class="right"><%= link_to @previous_data.institution,:action=>'show_previous_details', :id => @student.id %></td></tr>
       <%else%>
         <% if permitted_to? :previous_data,:student %>
-          <tr class="odd left"><td></td><td class="right"><%= t('no_previous_data') %> (<%= link_to "#{t('add_previous_data')}", :controller => 'student', :action => 'previous_data', :id => @student.id %>)</td></tr>
+          <tr class="even left"><td></td><td class="right"><%= t('no_previous_data') %> (<%= link_to "#{t('add_previous_data')}", :controller => 'student', :action => 'previous_data', :id => @student.id %>)</td></tr>
         <% else %>
           <tr class="odd left"><td></td><td class="right"><%= t('no_previous_data') %></td></tr>
         <% end %>

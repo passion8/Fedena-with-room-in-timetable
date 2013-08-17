@@ -128,18 +128,7 @@
         <label for="employee_qualification"><%= t('qualification') %></label>
         <div class="text-input-bg"><%= a.text_field :qualification %></div>
       </div>
-      <hr class="label-underline"></hr>
-      <div class="label-field-pair-text-area">
-        <label for="employee_experience"><%= t('exp_info') %></label>
-        <div class="textarea-input-bg"><%= a.text_area :experience_detail,:cols => 27, :rows => 5,:class => 'admission1-textarea' %></div>
-      </div>
-      <hr class="label-underline"></hr>
-      <div class="label-field-pair">
-        <label for="employee_total-experience"><%= t('total_exp') %></label>
-        <div class="text-input-bg"><%= select :employee, :experience_year, (0..20),{:prompt=>"#{t('year')}"} %>
-          <%= select :employee, :experience_month, (0..11),{:prompt=>"#{t('month')}"} %></div>
-      </div>
-      <hr class="label-underline"></hr>
+
 
 
 
