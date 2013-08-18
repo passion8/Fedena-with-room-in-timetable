@@ -17,6 +17,7 @@
 #limitations under the License.
 
 class ClassTiming < ActiveRecord::Base
+  
   has_many :timetable_entries, :dependent=>:destroy
   belongs_to :batch
 

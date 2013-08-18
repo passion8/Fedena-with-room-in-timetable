@@ -111,6 +111,12 @@
     margin: 0px auto;
     width:950px;
 }
+
+tr .row {
+
+}
+
+
 td{
     color: #9f191f;
     font-weight: bold;
@@ -129,9 +135,9 @@ tr.blank td{
 }
 td .name{
     background: #fff;
-    height: 35px;
+    height: 34px;
     text-align: center;
-    padding:15px 10px 0 10px;
+    padding:37px 10px 0 10px;
 }
 td .top{
     background: #fff;
@@ -163,7 +169,7 @@ td .tt-subject .employee{
 td.td{
     width:100px;
 }
-.employees_subject{
+.employees_subject , .rooms_list_room{
     background: #a6c7ff;
     -moz-border-radius:4px;
     -webkit-border-radius:4px;
@@ -177,16 +183,22 @@ td.td{
     margin:5px;
     cursor : move;
 }
-.employees_subject:hover{
+.employees_subject:hover , .rooms_list_room:hover{
     background: #9f191f;
 }
 .employee a {
     padding-top: 5px;
 }
+
+.top-clear {
+   padding-top: 50px; 
+}
+ 
+
 .drop{
     background: #fff;
     width:100%;
-    height:50px;
+    height:70px;
     text-transform: uppercase;
 }
 h4{
@@ -234,6 +246,18 @@ h4{
     font-weight:bold;
     text-align: center;
 }
+
+
+.room {
+
+}
+
+.room span {
+    display: block;
+    color: #bb0000;
+    min-width: 100px;
+}
+
 
 .drop{
     position: relative;

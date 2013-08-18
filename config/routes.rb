@@ -1,10 +1,11 @@
 ActionController::Routing::Routes.draw do |map|
 
+  map.resources :rooms
+
   map.resources :grading_levels
   map.resources :ranking_levels, :collection => {:create_ranking_level=>[:get,:post], :edit_ranking_level=>[:get,:post], :update_ranking_level=>[:get,:post], :delete_ranking_level=>[:get,:post], :ranking_level_cancel=>[:get,:post], :change_priority=>[:get,:post]}
   map.resources :class_designations
   #map.resources :exam_reports, :collection => {:course_reports_index=>[:get,:post], :batch_reports_index=>[:get,:post]}
-  map.resources :class_timings
   map.resources :subjects
   map.resources :attendances, :collection=>{:daily_register=>:get,:subject_wise_register=>:get}
   map.resources :employee_attendances
@@ -65,5 +66,8 @@ ActionController::Routing::Routes.draw do |map|
   map.connect ':controller/:action' 
   map.connect ':controller/:action/:id/:id2'
   map.connect ':controller/:action/:id.:format'
+
+  
+
 
 end

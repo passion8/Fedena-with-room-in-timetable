@@ -50,7 +50,7 @@
             <div class="drop">
               <div class="tt-subject">
                 <% if  @timetable[d.id][ct.id].present? %>
-                  <% unless  @timetable[d.id][ct.id].subject.elective_group.nil? %>
+                  <% unless  @timetable[d.id][ct.id].subject.elective_group.nil? && @timetable[d.id][ct.id].subject.elective_group.nil? %>
                     <div class="subject">
                       <%= @timetable[d.id][ct.id].subject.elective_group.name %>
                       <span>
@@ -82,13 +82,20 @@
                       <% if @timetable[d.id][ct.id].employee.present? %>
                         <%= @timetable[d.id][ct.id].employee.first_name %>
                       <% end %>
-                    <% end %>
-                  </div>
+                    </div>
+                    <div class="room">
+                      <% if @timetable[d.id][ct.id].room.present? %>
+                        <%= @timetable[d.id][ct.id].room.name %>
+                      <% end %>
+                    </div>
+                  <% end %>
                 <% else %>
 
                   <div class="subject">
                   </div>
                   <div class="employee">
+                  </div>
+                  <div class="room">
                   </div>
                 <% end %>
               </div>

@@ -38,37 +38,47 @@
     selected_divs = [];
   }
 
+  function ajax_update_room(tte_id, batch_id , room_id ) {
+
+    <%= remote_function(:update => "timetable",
+      :url => {:action => "update_room_in_timetable_entries"},
+      :with => "'room_id=' + room_id + '&tte_id=' + tte_id +  '&batch_id=' +  batch_id + '&timetable_id=' + #{@timetable.id}", :success => "clear_selected_divs()") %>
+        console.log(tte_id + "  " + batch_id + " " + room_id )
+  }
+
   function make_ajax_calls(tte_id, emp_sub_id){
-    if (selected_divs.length == 0) {
-<%= remote_function(:update => "timetable",
-  :url => {:action => "update_multiple_timetable_entries2"},
-  :with => "'emp_sub_id=' + emp_sub_id + '&tte_ids=' + tte_id + '&timetable_id=' + #{@timetable.id}", :success => "clear_selected_divs()") %>
-    }
+     if (selected_divs.length == 0) {
+        <%= remote_function(:update => "timetable",
+          :url => {:action => "update_multiple_timetable_entries2"},
+          :with => "'emp_sub_id=' + emp_sub_id + '&tte_ids=' + tte_id + '&timetable_id=' + #{@timetable.id}", :success => "clear_selected_divs()") %>
+            }
     else if (selected_divs.length == 1) {
-<%= remote_function(:update => "timetable",
-  :url => {:action => "update_multiple_timetable_entries2"},
-  :with => "'emp_sub_id=' + emp_sub_id + '&tte_ids=' + tte_id + '&timetable_id=' + #{@timetable.id}", :success => "clear_selected_divs()") %>
-      if (selected_divs[0] == tte_id) selected_divs.pop();
-    }
-    else {
-      var exists_in_list = 0;
-      for (x in selected_divs)
-        if(tte_id == selected_divs[x])
-          exists_in_list = 1;
-      if (exists_in_list) {
-        tte_list = selected_divs.join(',');
-<%= remote_function(:update => "timetable",
-  :url => {:action => "update_multiple_timetable_entries2"},
-  :with => "'emp_sub_id=' + emp_sub_id + '&tte_ids=' + tte_list + '&timetable_id=' + #{@timetable.id}", :success => "clear_selected_divs()") %>
-        selected_divs = [];
-      }
-      else
-<%= remote_function(:update => "timetable",
-  :url => {:action => "update_multiple_timetable_entries2"},
-  :with => "'emp_sub_id=' + emp_sub_id + '&tte_ids=' + tte_id + '&timetable_id=' + #{@timetable.id}", :success => "clear_selected_divs()") %>
-      }
+      <%= remote_function(:update => "timetable",
+        :url => {:action => "update_multiple_timetable_entries2"},
+        :with => "'emp_sub_id=' + emp_sub_id + '&tte_ids=' + tte_id + '&timetable_id=' + #{@timetable.id}", :success => "clear_selected_divs()") %>
+            if (selected_divs[0] == tte_id) selected_divs.pop();
+          }
+          else {
+            var exists_in_list = 0;
+            for (x in selected_divs)
+              if(tte_id == selected_divs[x])
+                exists_in_list = 1;
+            if (exists_in_list) {
+              tte_list = selected_divs.join(',');
+      <%= remote_function(:update => "timetable",
+        :url => {:action => "update_multiple_timetable_entries2"},
+        :with => "'emp_sub_id=' + emp_sub_id + '&tte_ids=' + tte_list + '&timetable_id=' + #{@timetable.id}", :success => "clear_selected_divs()") %>
+              selected_divs = [];
+            }
+    else
+      <%= remote_function(:update => "timetable",
+        :url => {:action => "update_multiple_timetable_entries2"},
+        :with => "'emp_sub_id=' + emp_sub_id + '&tte_ids=' + tte_id + '&timetable_id=' + #{@timetable.id}", :success => "clear_selected_divs()") %>
+            }
     }
 </script>
+
+
 <div id="content-header">
 <%#= stylesheet_link_tag("timetable/new_timetable.css") %>
   <%= image_tag("/images/show_timetable.png") %>
@@ -86,7 +96,7 @@
     <% end %>
 
     <div class="label-field-pair">
-      <%= hidden_field_tag :timetable_id,@timetable.id  %>
+      <%= hidden_field_tag :timetable_id, @timetable.id  %>
       <label for="timetable_entry_course_id"><%= t('select_a_batch') %>
         <%= image_tag("loader.gif",:align => "absmiddle",:border => 0,:id => "loader", :style =>"display: none;" ) %>
       </label>
@@ -103,7 +113,7 @@
     </div>
     <div id="render_area">
 
-      <div>
+    <div>
         <% if params[:edit].present? %>
           <% form_remote_for @timetable,:url=>{:controller=>:timetable,:action=>:update} do |f| %>
 

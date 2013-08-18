@@ -1,0 +1,14 @@
+<% if @rooms.nil? %>
+  
+  <% else %>
+    <div class="top-clear"></div>
+      <h4>Assign Rooms</h4>
+       
+          <div id="room-list">
+           <%  @rooms.each do |r|  %>
+            <div class="rooms_list_room"  id="<%= "room_#{r.id}" %>"   style="position: relative;"><%= r.name %> </div>
+              <%= draggable_element("room_#{r.id}" , :revert => true) %>
+            <% end %>
+          </div>
+        </div>
+<% end %>

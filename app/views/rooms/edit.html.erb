@@ -1,0 +1,10 @@
+<div class="box">
+<% form_for @room do |f| %>
+<div class="label-field-pair">
+  <label>Edit room : </label>
+<div class="text-input-bg"><%= f.text_field :name, :value => @room.name %>
+</div>
+  </div>
+  <%= submit_tag "", :value => "► Update", :class => "submit_button" %>
+<% end %>
+</div>

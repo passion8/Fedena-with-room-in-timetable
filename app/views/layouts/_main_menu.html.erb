@@ -91,7 +91,12 @@
       <ul class="level-1">
         <%  if permitted_to? :new_timetable,:timetable%>
           <li><%= link_to "#{t('create_timetable')}", :controller => "timetable", :action => "new_timetable" %></li>
-        <%  end%>
+        <%  end %>
+
+        <%  if permitted_to? :new_timetable,:timetable %>
+          <li><%= link_to "Rooms", :controller => "rooms", :action => "index" %></li>
+        <%  end %>
+
         <%if permitted_to? :edit_master,:timetable%>
           <li><%= link_to "#{t('edit_timetable')}", :controller => "timetable", :action => "edit_master" %></li>
         <%  end%>

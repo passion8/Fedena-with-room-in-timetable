@@ -1318,6 +1318,8 @@ authorization do
   # admin privileges
   role :admin do
     includes :archived_exam_reports
+
+    has_permission_on [:rooms], :to => [:create, :update]
     has_permission_on [:user],  :to => [:edit_privilege]
     has_permission_on [:weekday], :to => [:index, :week, :create]
     has_permission_on [:event],
@@ -2013,6 +2015,7 @@ authorization do
       :update_employees,
       :delete_employee2,
       :update_multiple_timetable_entries2,
+      :update_room_in_timetable_entries,
       :tt_entry_update2,
       :tt_entry_noupdate2
     ]

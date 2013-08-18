@@ -21,9 +21,10 @@ class TimetableEntriesController < ApplicationController
   filter_access_to :all
 
   def new
-    @timetable=Timetable.find(params[:timetable_id])
+    @timetable =Timetable.find(params[:timetable_id])
     
     @batches = Batch.active
+    @rooms = Room.active
   end
 
   def select_batch
@@ -50,6 +51,7 @@ class TimetableEntriesController < ApplicationController
     @batch = Batch.find(params[:batch_id])
     tte_from_batch_and_tt(@timetable.id)
     #    @weekday = ["#{t('sun')}", "#{t('mon')}", "#{t('tue')}", "#{t('wed')}", "#{t('thu')}", "#{t('fri')}", "#{t('sat')}"]
+    @rooms = Room.all
     render :update do |page|
       page.replace_html "render_area", :partial => "new_entry"
     end
@@ -62,6 +64,7 @@ class TimetableEntriesController < ApplicationController
       return
     end
     @employees_subject = EmployeesSubject.find_all_by_subject_id(params[:subject_id])
+    @rooms = Room.all
     render :partial=>"employee_list"
   end
 
@@ -77,7 +80,39 @@ class TimetableEntriesController < ApplicationController
     render :partial => "new_entry", :batch_id=>batch
   end
 
+  # def delete_room2
+  #   @errors = {"messages" => []}
+  #   tte=TimetableEntry.find(:first , :conditions => ["room_id = ?" , params[:room_id]])
+  #   tte.room
+  #   # batch=tte.batch_id
+  #   #    @timetable = TimetableEntry.find_all_by_batch_id(tte.batch_id)
+  #   # @batch=Batch.find batch
+  #   # @timetable=Timetable.find(tte.timetable_id)
+  #   # tte.destroy
+  #   tte_from_batch_and_tt(@timetable.id)
+  #   render :partial => "new_entry", :batch_id=>batch
+  # end
+
+
   #  for script
+
+
+  def update_room_in_timetable_entries 
+    @timetable = Timetable.find(params["timetable_id"])
+    tte_id = params['tte_id']
+    puts @timetable.inspect
+    co_ordinate = tte_id.split("_")
+    weekday = co_ordinate[0].to_i
+    class_timing = co_ordinate[1].to_i
+    tte = TimetableEntry.find_or_create_by_timetable_id_and_batch_id_and_class_timing_id_and_weekday_id(params["timetable_id"].to_i, params['batch_id'].to_i, class_timing, weekday)
+    tte.room_id = params["room_id"]
+    tte.save
+    puts "TIMETABLE ID IS #{@timetable.id}"
+    @batch = Batch.find params[:batch_id]
+    @rooms = Room.all
+    tte_from_batch_and_tt(@timetable.id)
+    render :partial => "new_entry" 
+  end
 
   def update_multiple_timetable_entries2
     @timetable=Timetable.find(params[:timetable_id])
@@ -88,6 +123,8 @@ class TimetableEntriesController < ApplicationController
     employee = employees_subject.employee
     @validation_problems = {}
     puts params[:tte_ids].inspect
+    @rooms = Room.all
+    
     puts tte_ids.inspect
     puts @timetable.inspect
     tte_ids.each do |tte_id|
@@ -136,6 +173,7 @@ class TimetableEntriesController < ApplicationController
     tte_from_batch_and_tt(@timetable.id)
     render :partial => "new_entry"
   end
+
 
   def tt_entry_update2
     @errors = {"messages" => []}
@@ -193,7 +231,7 @@ class TimetableEntriesController < ApplicationController
     if @weekday.empty?
       @weekday = Weekday.default
     end
-    timetable_entries=TimetableEntry.find(:all,:conditions=>{:batch_id=>@batch.id,:timetable_id=>@tt.id},:include=>[:subject,:employee])
+    timetable_entries=TimetableEntry.find(:all,:conditions=>{:batch_id=>@batch.id,:timetable_id=>@tt.id},:include=>[:subject,:employee,:room])
     @timetable= Hash.new { |h, k| h[k] = Hash.new(&h.default_proc)}
     timetable_entries.each do |tte|
       @timetable[tte.weekday_id][tte.class_timing_id]=tte

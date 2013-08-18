@@ -1,0 +1,15 @@
+<ul id="room-list">
+  <% @rooms.try(:each) do |c| %>
+  <li class="list<%=cycle('odd', 'even')%>">
+    <div class="room-name">
+      <%= c.name %>
+    </div>
+    <div class="room-edit">
+      <%= link_to "#{t('edit_text')}" , edit_room_path(c) %>
+    </div>
+    <div class="room-delete">
+      <%= link_to "#{t('delete_text')}" , room_path(c) , :method => :delete, :confirm => "Are you sure ?" %>
+    </div>
+  </li>
+  <% end %>
+</ul>
