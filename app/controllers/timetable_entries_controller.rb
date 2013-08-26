@@ -75,8 +75,16 @@ class TimetableEntriesController < ApplicationController
     #    @timetable = TimetableEntry.find_all_by_batch_id(tte.batch_id)
     @batch=Batch.find batch
     @timetable=Timetable.find(tte.timetable_id)
+    
+    start_time = tte.class_timing.start_time
+    end_time = tte.class_timing.end_time
+    day = Date::DAYNAMES[tte.weekday.day_of_week].downcase
+    ra = RoomAvailability.find_by_start_time_and_end_time(start_time , end_time , day)
+    ra.destroy
+
     tte.destroy
     tte_from_batch_and_tt(@timetable.id)
+    @rooms = Room.all
     render :partial => "new_entry", :batch_id=>batch
   end
 
@@ -97,16 +105,41 @@ class TimetableEntriesController < ApplicationController
   #  for script
 
 
-  def update_room_in_timetable_entries 
+  def update_room_in_timetable_entries
     @timetable = Timetable.find(params["timetable_id"])
     tte_id = params['tte_id']
     puts @timetable.inspect
     co_ordinate = tte_id.split("_")
     weekday = co_ordinate[0].to_i
     class_timing = co_ordinate[1].to_i
-    tte = TimetableEntry.find_or_create_by_timetable_id_and_batch_id_and_class_timing_id_and_weekday_id(params["timetable_id"].to_i, params['batch_id'].to_i, class_timing, weekday)
-    tte.room_id = params["room_id"]
-    tte.save
+
+    puts  "CLASS TIMING " + "#{class_timing}"
+
+
+
+    tte = TimetableEntry.find_by_timetable_id_and_batch_id_and_class_timing_id_and_weekday_id(params["timetable_id"].to_i, params['batch_id'].to_i, class_timing, weekday)
+    
+    if tte
+      start_time = tte.class_timing.start_time + weekday.day
+      end_time = tte.class_timing.end_time + weekday.day
+      day = tte.weekday.day_of_week
+
+
+      if Room.find(params["room_id"]).available?(start_time,end_time , day )
+        # raise
+        ra = RoomAvailability.new
+        ra.start_time = tte.class_timing.start_time 
+        ra.end_time = tte.class_timing.end_time
+        ra.day  = Date::DAYNAMES[day].downcase
+        ra.room_id = params['room_id']
+        if ra.save 
+          tte.room_id = params["room_id"]
+          tte.save
+        end
+        
+      end
+
+    end
     puts "TIMETABLE ID IS #{@timetable.id}"
     @batch = Batch.find params[:batch_id]
     @rooms = Room.all

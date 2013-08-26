@@ -94,7 +94,7 @@
         <%  end %>
 
         <%  if permitted_to? :new_timetable,:timetable %>
-          <li><%= link_to "Rooms", :controller => "rooms", :action => "index" %></li>
+          <li><%= link_to "Create Rooms", :controller => "rooms", :action => "index" %></li>
         <%  end %>
 
         <%if permitted_to? :edit_master,:timetable%>

@@ -131,6 +131,7 @@
                 <%= f.date_select :end_date,:use_month_numbers=>true,:start_year=>1.years.ago.year,:end_year=>1.years.since.year,:order=>[:day,:month,:year],:include_blank => false %>
               </div>
             </div>
+            
             <%= submit_tag "", :value => "► Save", :class => "submit_button" %>
           <% end %>
         <% end %>

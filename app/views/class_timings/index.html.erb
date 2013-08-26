@@ -46,11 +46,12 @@
         :success => "Element.hide('loader')"
         )}"} %>
       <%= image_tag("loader.gif", :align => "absmiddle", :border => 0, :id => "loader", :style =>"display: none;" ) %>
-    </div></div>
+    </div>
+  </div>
 
-  <div id="class-timings-list"><%= render :partial => "show_batch_timing" %></div>
   <div id="modal-box" style="display:none;"></div>
 
+  <div id="class-timings-list"><%= render :partial => "show_batch_timing" %></div>
   <div class="extender"></div>
 </div>
 

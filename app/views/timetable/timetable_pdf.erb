@@ -61,6 +61,9 @@
                     <% else %>
                       (<%= t('elective').upcase %>)
                     <% end %>
+                    <% unless tte.room_id.nil? %>
+                      (<%= tte.room.name %>)
+                    <% end %>
                   </td>
                 <% else %>
                   <td class="col-pdf"><%= period %></td>

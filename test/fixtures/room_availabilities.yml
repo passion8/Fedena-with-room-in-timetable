@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  start_time: 2013-08-26
+  end_time: 2013-08-26
+  room_id: 1
+
+two:
+  start_time: 2013-08-26
+  end_time: 2013-08-26
+  room_id: 1
