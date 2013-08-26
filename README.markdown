@@ -1,24 +1,16 @@
-#Fedena : Open source school management system
+#Fedena with room in timetable
+Fedena is good but sometimes or in some school, students change room as per subject. This fedena will solve this problem.
 
-Project Fedena is the open source school management system based on Ruby on Rails. It is developed by a team of developers at Foradian Technologies. The project was made open source by Foradian, and is now maintained by the open source community. Fedena is the ideal solution for schools and campuses that want an easy means to manage all campus records.
 
-The Project Fedena website http://www.projectfedena.org/ is the home to the developer community behind Fedena project. There you can find forums and bug tracker for Fedena.
+##Features
 
-#Demo
-A demo website for Fedena has been set up at demo.projectfedena.org. You can log in with following usernames and passwords:
+1. You can create rooms.
+2. You can assign rooms to the classes in the timetable.
+3. Rooms will be assigned only when it is not used by other classes.
 
-    * As admin -- username - admin, password - admin123
-    * As student -- username - 1, password - 1123
-    * As employee -- username - E1, password - E1123
+##Screenshot
+![Timetable With Rooms](timetable-with-rooms.png "http://localhost:3000/timetables/2/timetable_entries/new")
 
-#License
 
-Fedena is released under the Apache License 2.0.
-
-#Installation
-
-Visit  http://projectfedena.org/install for detailed installation instruction.
-
-#Community Support:
-
-Visit www.projectfedena.org for community support.
+##License
+Author ([Paritosh](http://paritosh.passion8.co.in)) don't care of license or anything. You can use it for whatever purpose without informing him.
